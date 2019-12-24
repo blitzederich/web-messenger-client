@@ -1,0 +1,42 @@
+.message-wrap {
+    margin-top: 5px;
+    width: 100%;
+}
+
+.message-wrap:after {
+    clear: both;
+    content: '';
+    display: block;
+}
+
+.message-wrap + .message-wrap.you { margin-top: 20px; }
+.message-wrap.you + .message-wrap { margin-top: 20px; }
+.message-wrap.you + .message-wrap.you { margin-top: 5px; }
+
+.message {
+    background-color: #fff;
+    box-shadow: 0 0 0 1px var(--message-border-color);
+    border-radius: 10px;
+    display: inline-block;
+    padding: 5px 10px;
+    position: relative;
+}
+
+.message.you {
+    background-color: var(--message-bg-you);
+}
+
+.message__text {
+    min-width: 200px;
+}
+
+.message__date {
+    color: var(--font-color-secondary);
+    float: right;
+    font-size: 90%;
+    line-height: 18px;
+}
+
+@media (max-width: 1200px) {
+    .message.you { float: right; }
+}

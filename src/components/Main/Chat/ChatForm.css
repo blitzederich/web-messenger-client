@@ -1,0 +1,66 @@
+.chat__form {
+    background-color: #fff;
+    box-shadow: 0 -2px 3px rgba(0,0,0,.1);
+    display: flex;
+    flex-shrink: 0;
+    height: 50px;
+    z-index: 500;
+}
+
+.chat__input {
+    border: 0;
+    height: 50px;
+    outline: none;
+    width: 100%;
+}
+
+.chat__attach {
+    flex-shrink: 0;
+    height: 50px;
+    padding: 5px;
+    width: 50px;
+}
+
+.chat__attach button {
+    background-color: #fff;
+    border: 0;
+    border-radius: 50%;
+    cursor: pointer;
+    height: 40px;
+    outline: none;
+    padding: 8px;
+    width: 40px;
+}
+
+.chat__attach:hover button, 
+.chat__attach:active button {
+    background-color: #f5f5f5;
+}
+
+.chat__submit {
+    display: block;
+    flex-shrink: 0;
+    height: 50px;
+    padding: 7px;
+    width: 50px;
+}
+
+.chat__submit button {
+    background-color: #fff;
+    border: 0;
+    border-radius: 50%;
+    cursor: pointer;
+    display: block;
+    fill: #000;
+    height: 36px;
+    outline: none;
+    padding: 6px 5px 6px 7px;
+    transform: scale(0);
+    transition: transform .2s;
+    width: 36px;
+}
+
+.chat__submit.active button {
+    transform: scale(1);
+    transition: transform .2s;
+}

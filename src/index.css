@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap');
+
+:root {
+    --font-color-primary: #2196f3;
+    --font-color-secondary: #999;
+
+    --bg-color: #f5f5f5;
+    --right-bg-color: #fcfcfc;
+    --border-color: #e5e5e5;
+
+    --message-bg-you: #e5e5e5;
+    --message-border-color: #d5d5d5;
+
+    --hover-color: var(--bg-color);
+
+}
+
+* {
+    box-sizing: border-box;
+    font-family: inherit;
+    font-size: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+}
+
+input {
+    -webkit-appearance: none;
+    border-radius: 0;
+}
+
+#root {
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+@media (max-width: 1023px) {
+    
+    body {
+        font-size: 16px;
+    }
+
+}

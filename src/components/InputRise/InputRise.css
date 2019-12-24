@@ -1,0 +1,37 @@
+.input-rise {
+    height: 50px;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.input-rise__label {
+    bottom: 0;
+    color: #888;
+    cursor: text;
+    height: 35px;
+    left: 0;
+    line-height: 35px;
+    position: absolute;
+    transition: all .15s cubic-bezier(.35,0,.25,1);
+}
+
+.input-rise__label.active {
+    bottom: 25px;
+    font-size: 90%;
+    transition: all .15s cubic-bezier(.35,0,.25,1);
+}
+
+.input-rise__input {
+    border: 0;
+    border-bottom: 1px solid #ccc;
+    height: 35px;
+    line-height: 35px;
+    margin-top: 15px;
+    outline: none;
+    transition: all .3s;
+    width: 100%;
+}
+
+.input-rise__input:focus {
+    border-color: #000;
+}

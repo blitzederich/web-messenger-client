@@ -1,0 +1,50 @@
+.chat__head {
+    background-color: #fff;
+    box-shadow: 0 2px 3px rgba(0,0,0,.1);
+    display: flex;
+    flex-shrink: 0;
+    height: 60px;
+    z-index: 500;
+}
+
+.chat__back-wrap {
+    height: 60px;
+    padding: 10px;
+    width: 60px;
+}
+
+.chat__back {
+    border-radius: 50%;
+    cursor: pointer;
+    height: 40px;
+    padding: 8px;
+    width: 40px;
+}
+
+.chat__back:hover {
+    background-color: var(--hover-color);
+}
+
+.profile-link {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    padding: 10px 0;
+}
+
+.profile-link__fullname {
+    height: 20px;
+    line-height: 20px;
+}
+
+.profile-link__status {
+    color: var(--font-color-secondary);
+    font-size: 90%;
+    height: 20px;
+    line-height: 20px;
+}
+
+.profile-link__status.online {
+    color: var(--font-color-primary);
+}

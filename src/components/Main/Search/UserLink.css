@@ -1,0 +1,57 @@
+.user-link {
+    color: #000;
+    cursor: pointer;
+    display: flex;
+    padding: 10px;
+    text-decoration: none;
+    transition: all .15s cubic-bezier(.35,0,.25,1); 
+}
+
+.user-link:hover {
+    background-color: #f5f5f5;
+    transition: all .15s cubic-bezier(.35,0,.25,1);
+}
+
+.user-link__img {
+    border-radius: 50%;
+    flex-shrink: 0;
+    height: 50px;
+    margin-right: 10px;
+    width: 50px;
+}
+
+.user-link__content {
+    font-size: 14px;
+    line-height: 20px;
+    overflow: hidden;
+    padding: 5px 0;
+    white-space: nowrap;
+    width: 100%;
+}
+
+.user-link__head {
+    display: flex;
+    justify-content: space-between;
+}
+
+.user-link__peer {
+    font-weight: 700;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+
+.user-link__date {
+    color: #999;
+    font-size: 90%;
+}
+
+.user-link__you {
+    color: #2196f3;
+}
+
+.user-link__text {
+    color: #999;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
