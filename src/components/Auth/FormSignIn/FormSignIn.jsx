@@ -8,7 +8,7 @@ import API from '../../../api.js';
 
 function FormSignIn(props) {
 
-    const setIsLogin = useContext(Context).setIsLogin;
+    const { setIsLogin } = useContext(Context);
     
     const switchForm = () => props.switch(false);
 
@@ -19,7 +19,7 @@ function FormSignIn(props) {
 
     const onFormSubmit = async e => {
         e.preventDefault();
-
+        
         let api_signIn = await API('/Auth/signIn', { login, password });
         
         if (!api_signIn.status)

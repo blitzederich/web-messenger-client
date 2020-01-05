@@ -16,14 +16,20 @@ function Search(props) {
 
     useEffect(() => {
         setIsLoading(true);
+
         let timerId = setTimeout(async () => {
-            let api_search = await API('/Users/search', {textSearch: search}),
-                users = api_search.data.users;
+            
+            let api_search = await API('/Users/search', { textSearch: search }),
+                users      = api_search.data.users;
 
             setUsers(users);
             setIsLoading(false);
+
         }, 700);
-        return () => clearTimeout(timerId);
+
+        return () => {
+            clearTimeout(timerId);
+        }
     }, [search]);
 
     if (isLoading) return <Loading />;

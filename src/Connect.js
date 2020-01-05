@@ -1,17 +1,20 @@
 const Connect = {};
 
 Connect.connection = undefined;
+Connect.lastEventId = '';
 Connect.listeners = {};
 Connect.options = { url: '/LongPoll', method: 'GET', timeout: 10*60*1000 };
 
 Connect.connect = () => {
     let xhr = new XMLHttpRequest();
     let {method, url, timeout} = Connect.options;
-    xhr.open(method, url + '?' + Math.random());
+    xhr.open(method, url + '?' + (Connect.lastEventId ? ('lastEventId=' + Connect.lastEventId + '&') : '') + Math.random());
     xhr.timeout = timeout;
     xhr.send();
+
     xhr.addEventListener('load', () => {
         let event = JSON.parse(xhr.responseText).event;
+        Connect.lastEventId = event.eventId;
         Connect.update(event);
         Connect.connect();
     });
@@ -24,6 +27,7 @@ Connect.connect = () => {
     xhr.addEventListener('error', () => {
         Connect.connect();
     });
+    
     Connect.connection = xhr;
 }
 

@@ -13,10 +13,13 @@ import './Main.css';
 
 function Main(props) {  
     
-    const {peerId, dispatchDialogs, dispatchMessages} = useContext(Context);
+    const {isActiveTab, peerId, dispatchDialogs, dispatchMessages} = useContext(Context);
 
     const refPeerId = useRef();
     refPeerId.current = peerId;
+
+    const refIsActiveTab = useRef();
+    refIsActiveTab.current = isActiveTab;
 
     useEffect(() => {
         Connect.connect();
@@ -32,7 +35,15 @@ function Main(props) {
                     if (refPeerId.current === message.peerId) {
                         dispatchMessages({type: 'push', message: message});
                         dispatchDialogs({type: 'read:you', peerId: refPeerId.current });
+                        
                         API('/Messages/readHistory', { peerId: refPeerId.current});
+
+                        if (!refIsActiveTab.current) {
+                            refAudio.current.play();
+                        }
+
+                    } else {
+                        refAudio.current.play();
                     }
 
                     break;
@@ -91,6 +102,8 @@ function Main(props) {
 
     /*** Touch end ***/
 
+    const refAudio = useRef();
+
     return (
         <>
             <main className="main">
@@ -116,6 +129,7 @@ function Main(props) {
                 </div>
             </main>
             { drawerIsView ? <Drawer close={ () => setDrawerIsView(false) } /> : null }
+            <audio ref={ refAudio } preload="auto" src="/sound/new-message.mp3"></audio>
         </>
     );
 }

@@ -8,11 +8,11 @@ import './Dialogs.css';
 import Context from '../../../context.js';
 import API from '../../../api.js';
 
-function Dialogs(props) {
+function Dialogs() {
 
     const [isLoading, setIsLoading] = useState(false);
 
-    const {isLogin, dialogs, dispatchDialogs} = useContext(Context);
+    const {dialogs, dispatchDialogs} = useContext(Context);
 
     useEffect(() => {
         (async () => {
@@ -22,7 +22,7 @@ function Dialogs(props) {
             setIsLoading(true);
             
             let api_getDialogs = await API('/Messages/getDialogs'),
-                initDialogs = api_getDialogs.data.dialogs;
+                initDialogs    = api_getDialogs.data.dialogs;
 
             dispatchDialogs({type: 'init', dialogs: initDialogs});
 

@@ -3,8 +3,9 @@ import React, {useState, useEffect, useContext} from 'react';
 import Modal from '../Modal/Modal.jsx';
 
 import {timeDiff} from '../../../functions.js';
-import Context from '../../../context.js';
 import API from '../../../api.js';
+
+import Users from '../../../store/Users.js';
 
 import './ViewProfile.css';
 
@@ -15,27 +16,20 @@ export default function ViewProfile(props) {
 
     const [userLogin, setUserLogin] = useState('');
     const [userFullName, setUserFullName] = useState('');
-    const [userActivity, setUserActivity] = useState({text: 'Был(а) в сети давно'})
+    const [userActivity, setUserActivity] = useState({text: 'Был(а) в сети давно'});
 
     useEffect(() => {
         (async () => {
 
-            let api_getUsers= await API('/Users/getUsers', { usersId: [userId] }),
-                user = api_getUsers.data.users[ 0 ];
+            let getUsers = await Users.getUsers([userId]),
+                user     = getUsers[ userId ];
             
             setUserLogin(user.login);
             setUserFullName(user.fullName);
 
-            let api_getActivity = await API('/Users/getActivity', { usersId: [userId] });
+            let lastActivity = timeDiff(user.lastActivity);
 
-            if (api_getActivity.data.activity.length === 0)
-                return setUserActivity('Был(а) в сети давно');
-
-            let date = api_getActivity.data.activity[ 0 ].date;
-                
-            let activity = timeDiff(date);
-
-            setUserActivity( activity );
+            setUserActivity(lastActivity);
 
         })();
     }, [userId]);

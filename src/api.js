@@ -1,16 +1,18 @@
 const API = async (url, data) => {
 
-    const URL = `/api${url}`;
-    const options = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-    };
+    const URL = `/api${ url }`;
+    const options = {};
 
-    let json = await fetch(URL, options),
-        res  = await json.json();
+    if (data) {
+        options.method  = 'POST';
+        options.headers = { 'Content-Type': 'application/json' };
+        options.body    = JSON.stringify(data);
+    }
 
-    return Promise.resolve(res);
+    let res  = await fetch(URL, options),
+        json = await res.json();
+
+    return Promise.resolve(json);
 
 }
 

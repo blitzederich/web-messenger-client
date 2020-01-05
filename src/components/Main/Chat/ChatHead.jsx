@@ -4,41 +4,41 @@ import ViewProfile from '../ViewProfile/ViewProfile.jsx';
 
 import {timeDiff} from '../../../functions.js';
 import Context from '../../../context.js';
-import API from '../../../api.js';
+
+import Users from '../../../store/Users.js';
 
 import './ChatHead.css';
 
-export default function ChatHead(props) {
+export default function ChatHead() {
 
     const { peerId, setPeerId } = useContext(Context);
 
     const [peerFullName, setPeerFullName] = useState('');
-    const [peerActivity, setPeerActivity] = useState({text: 'Был(а) в сети давно'});
+
+    const activityObj = {
+        isOnline: false, 
+        isWriting: false, 
+        text: 'Был(а) в сети давно'
+    };
+    const [peerActivity, setPeerActivity] = useState(activityObj);
 
     useEffect(() => {
         (async () => {
             if (!peerId) return;
 
-            let api_getUsers = await API('/Users/getUsers', { usersId: [peerId] }),
-                peer = api_getUsers.data.users[ 0 ];
-            
+            let getUsers = await Users.getUsers([peerId]),
+                peer     = getUsers[ peerId ];
+
             setPeerFullName(peer.fullName);
 
-            let api_getActivity = await API('/Users/getActivity', { usersId: [peerId] });
+            let lastActivity = timeDiff(peer.lastActivity);
 
-            if (api_getActivity.data.activity.length === 0)
-                return setPeerActivity({text: 'Был(а) в сети давно'});
-
-            let date = api_getActivity.data.activity[ 0 ].date;
-                
-            let activity = timeDiff(date);
-
-            setPeerActivity( activity );
+            setPeerActivity( lastActivity );
 
         })();
     }, [peerId]);
 
-    const onButtonClick = e => setPeerId(false);
+    const onButtonClick = () => setPeerId(false);
 
     const [modalView, setModalView] = useState(false);
 

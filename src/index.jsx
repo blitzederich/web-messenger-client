@@ -15,6 +15,8 @@ import reducerMessages from './reducers/reducerMessages.js'
 import Context from './context.js';
 import API from './api.js'
 
+import Users from './store/Users.js';
+
 import'./index.css';
 
 function App() {
@@ -29,8 +31,19 @@ function App() {
     const [dialogs, dispatchDialogs] = useReducer(reducerDialogs, []);
     const [messages, dispatchMessages] = useReducer(reducerMessages, []);
 
+    const [isActiveTab, setIsActiveTab] = useState(true);
+    useEffect(() => {
+        const onWindowBlur = () => setIsActiveTab(false);
+        const onWindowFocus = () => setIsActiveTab(true);
+
+        window.addEventListener('blur', onWindowBlur);
+        window.addEventListener('focus', onWindowFocus);
+
+    }, []);
+
     useEffect(() => {
         (async () => {
+
             let api_isLogin = await API('/Auth/isLogin');
             if (!api_isLogin.status) 
                 return setIsLogin(false);
@@ -46,8 +59,8 @@ function App() {
             if (isLogin === null) return;
             if (isLogin === false) return;
              
-            let api_getUsers = await API('/Users/getUsers', { usersId: [isLogin] }),
-                user = api_getUsers.data.users[ 0 ];
+            let getUsers = await Users.getUsers([isLogin]),
+                user     = getUsers[ isLogin ];
 
             setUserLogin(user.login);
             setUserFullName(user.fullName);
@@ -59,6 +72,7 @@ function App() {
     }, [peerId]);
 
     const Provider = {
+        isActiveTab,
         isLogin, setIsLogin,
         userLogin, userFullName,
         peerId, setPeerId,

@@ -1,3 +1,5 @@
+import React from 'react';
+
 
 export const formatDate = date => {
     date = new Date(date);
@@ -18,8 +20,9 @@ export const formatDate = date => {
  * @param {number} date 
  * 
  * @returns {{
- *  isOnline?: boolean
- *  text: string
+ *  isOnline?: boolean,
+ *  isWriting?: boolean
+ *  text: string,
  * }}
  * 
  */
@@ -51,4 +54,21 @@ export const timeDiff = (date) => {
         return {text: `Был(а) в сети ${diffMinutes} минуты назад`};
 
     return {text: `Был(а) в сети ${diffMinutes} минут назад`};
+}
+
+export const scanLinkFromText = text => {
+
+    let regExp = /(https?:\/\/[.\w/\w-=?&#]+)/gi,
+        split = text.split(regExp);
+
+    if (split.length < 3) 
+        return text;
+
+    return split.map((element, i) => {
+        if (regExp.test(element))
+            return <a href={ element } className="message__link" target="_blank" rel="noreferrer noopener" key={ i }>{ element }</a>;
+        else
+            return element;
+    });
+
 }

@@ -4,7 +4,7 @@ import MessageStatus from '../MessageStatus/MessageStatus.jsx';
 
 import './Message.css';
 
-import {formatDate} from '../../../functions.js';
+import {formatDate, scanLinkFromText} from '../../../functions.js';
 
 function Message(props) {
 
@@ -14,7 +14,7 @@ function Message(props) {
     return (
         <div className={'message-wrap' + (isLogin === message.senderId ? ' you' : '')}>
             <div className={'message' + (isLogin === message.senderId ? ' you' : '')}>
-                <div className="message__text">{ message.text }</div>
+                <div className="message__text">{ scanLinkFromText(message.text) }</div>
                 { ((isLogin === message.senderId) && (message.senderId !== message.recipientId)) ? (message.unread ? <MessageStatus isRead={ false } /> : <MessageStatus isRead={ true } />) : null }
                 <div className="message__date">{ formatDate(message.date) }</div>
             </div>

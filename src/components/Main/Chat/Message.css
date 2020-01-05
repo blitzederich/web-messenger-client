@@ -30,6 +30,15 @@
     min-width: 200px;
 }
 
+.message__link {
+    color: var(--font-color-primary);
+    text-decoration: none;
+}
+
+.message__link:hover {
+    text-decoration: underline;
+}
+
 .message__date {
     color: var(--font-color-secondary);
     float: right;
