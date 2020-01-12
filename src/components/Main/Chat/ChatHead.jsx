@@ -3,6 +3,7 @@ import React, {useState, useEffect, useContext} from 'react';
 import ViewProfile from '../ViewProfile/ViewProfile.jsx';
 
 import {timeDiff} from '../../../functions.js';
+import Connect from '../../../Connect.js';
 import Context from '../../../context.js';
 
 import Users from '../../../store/Users.js';
@@ -12,6 +13,27 @@ import './ChatHead.css';
 export default function ChatHead() {
 
     const { peerId, setPeerId } = useContext(Context);
+
+    /**
+     * Typing handler
+     */
+    const [typing, setTyping] = useState(false);
+    useEffect(() => {
+        let updateId = Connect.addUpdateListener((event) => {
+
+            if (event.type !== 'message:typing') return;
+            if (event.data.peerId !== peerId) return;
+
+            setTyping(true);
+            setTimeout(() => {
+                setTyping(false);
+            }, 5000);
+
+        });
+        return () => {
+            Connect.removeUpdateListener(updateId);
+        }
+    });
 
     const [peerFullName, setPeerFullName] = useState('');
 
@@ -38,6 +60,23 @@ export default function ChatHead() {
         })();
     }, [peerId]);
 
+    useEffect(() => {
+
+        const updateActivity = (user) => {
+            if (user.id !== peerId) return;
+
+            let lastActivity = timeDiff(user.lastActivity);
+
+            setPeerActivity( lastActivity );
+
+        }
+
+        Users.on('users:activity', updateActivity);
+        return () => {
+            Users.removeListener('users:activity', updateActivity);
+        }
+    }, [peerId]);
+
     const onButtonClick = () => setPeerId(false);
 
     const [modalView, setModalView] = useState(false);
@@ -60,7 +99,7 @@ export default function ChatHead() {
 
                 <div className="profile-link" onClick={ showProfile }>
                     <b className="profile-link__fullname">{ peerFullName }</b>
-                    <span className={'profile-link__status' + (peerActivity.isOnline ? ' online' : '')}>{ peerActivity.text }</span>
+                    <span className={'profile-link__status' + (peerActivity.isOnline ? ' online' : '')}>{ typing ? 'набирает сообщение...' : peerActivity.text }</span>
                 </div>
 
             </div>

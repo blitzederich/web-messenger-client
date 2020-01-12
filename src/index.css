@@ -13,6 +13,8 @@
 
     --hover-color: var(--bg-color);
 
+    --animation-time: .3s;
+
 }
 
 * {

@@ -1,3 +1,7 @@
+.drawer-wrap {
+    
+}
+
 .drawer {
     background-color: #fff;
     bottom: 0;
@@ -6,14 +10,15 @@
     position: fixed;
     top: 0;
     width: 300px;
-
-    left: -300px;
-    transition: .2s;
 }
 
-.drawer.active {
-    left: 0;
-    transition: .2s;
+.drawer.animation {
+    animation-duration: .3s;
+    animation-name: drawer--slide;
+}
+
+.drawer.animation.reverse {
+    animation-direction: reverse;
 }
 
 .drawer__card {
@@ -77,4 +82,13 @@
     font-size: 90%;
     font-weight: 700;
     height: 24px;
+}
+
+@keyframes drawer--slide {
+    from {
+        left: -300px;
+    }
+    to {
+        left: 0;
+    }
 }

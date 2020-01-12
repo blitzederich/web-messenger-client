@@ -50,12 +50,28 @@ function ChatForm() {
 
     }
 
+    const [typing, setTyping] = useState(false);
+    const eventTyping = () => {
+
+        if (typing) return;
+
+        setTyping(true);
+        setTimeout(() => {
+            setTyping(false);
+        }, 5000);
+
+        API('/Messages/setTyping', { peerId });
+        
+    }
+
     const onInputChange = e => {
         if (e.target.value.trim() !== '')
             refSubmit.current.classList.add('active');
         else
             refSubmit.current.classList.remove('active');
         setText(e.target.value);
+
+        eventTyping();
     }
 
     const onSubmitClick = e => {

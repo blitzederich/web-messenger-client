@@ -1,10 +1,8 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useState, useEffect  } from 'react';
 
 import Modal from '../Modal/Modal.jsx';
 
 import {timeDiff} from '../../../functions.js';
-import API from '../../../api.js';
-
 import Users from '../../../store/Users.js';
 
 import './ViewProfile.css';

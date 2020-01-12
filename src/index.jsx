@@ -5,8 +5,10 @@ import React, { useState, useEffect, useReducer } from 'react';
 import ReactDOM from 'react-dom';
 
 import Loading from './components/Loading/Loading.jsx';
+import DarkScreen from './components/DarkScreen/DarkScreen.jsx';
 import Auth from './components/Auth/Auth.jsx';
 import Main from './components/Main/Main.jsx';
+
 
 //import reducerUsers from './reducers/reducerUsers.js';
 import reducerDialogs from './reducers/reducerDialogs.js';
@@ -40,6 +42,7 @@ function App() {
         window.addEventListener('focus', onWindowFocus);
 
     }, []);
+
 
     useEffect(() => {
         (async () => {

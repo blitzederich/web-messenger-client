@@ -9,7 +9,7 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.(js|jsx)$/,
+                test: /\.(js|jsx)?$/,
                 loader: 'babel-loader',
                 options: {
                     presets: ['@babel/preset-env', '@babel/preset-react']
@@ -20,5 +20,9 @@ module.exports = {
                 use: ['style-loader', 'postcss-loader']
             }
         ]
+    },
+    resolve: {
+        alias: {},
+        extensions: ['.js', '.jsx']
     }
 }

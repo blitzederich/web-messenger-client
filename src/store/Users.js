@@ -1,4 +1,5 @@
 import {EventEmitter} from 'events';
+import Connect from '../Connect.js';
 import API from '../api.js';
 
 class StoreUsers extends EventEmitter {
@@ -6,6 +7,19 @@ class StoreUsers extends EventEmitter {
         super();
 
         this.users = {};
+
+        Connect.addUpdateListener((event) => {
+            if (event.type !== 'message:typing') return;
+
+            let id = event.data.peerId;
+
+            if (this.users[ id ] === undefined) return;
+
+            let lastActivity = Date.now();
+            this.users[ id ].lastActivity = lastActivity;
+
+            this.emit('users:activity', {...this.users[ id ]});
+        });
 
     }
 

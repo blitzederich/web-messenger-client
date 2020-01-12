@@ -73,46 +73,12 @@ function Main(props) {
     const [drawerIsView, setDrawerIsView] = useState(false);
     const onNavClick = e => setDrawerIsView(true);
 
-    /*** Touch ***/
-
-    let clientX,
-        clientY;
-
-    const onTouchStart = e => {
-        clientX = e.touches[ 0 ].clientX;
-        clientY = e.touches[ 0 ].clientY;
-    }
-
-    const onTouchMove = e => {
-
-        let difX = e.touches[ 0 ].clientX - clientX,
-            difY = e.touches[ 0 ].clientY - clientY;
-
-        if (difX < 0) return;
-        if (difX < 80) return;
-        if (difX < difY) return;
-
-        setDrawerIsView(true);
-        
-    }
-
-    const onTouchEnd = e => {
-        clientX, clientY = undefined;
-    }
-
-    /*** Touch end ***/
-
     const refAudio = useRef();
 
     return (
         <>
             <main className="main">
-                <div
-                    className="left-side"
-                    onTouchStart={ onTouchStart }
-                    onTouchMove={ onTouchMove } 
-                    onTouchEnd={ onTouchEnd }
-                >
+                <div className="left-side">
                     <div className="left-side__head">
                         <button className="nav-toggle" type="button" onClick={ onNavClick }>
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">

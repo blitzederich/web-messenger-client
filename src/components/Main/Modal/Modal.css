@@ -6,6 +6,15 @@
     width: 100%;
 }
 
+.modal.animation {
+    animation-duration: .3s;
+    animation-name: modal--slide;
+}
+
+.modal.animation.reverse {
+    animation-direction: reverse;
+}
+
 .modal__head {
     box-shadow: 0 1px 0 var(--border-color);
     display: flex;
@@ -36,6 +45,17 @@
 
 .icon__back { display: none; }
 
+@keyframes modal--slide {
+    from {
+        margin: 100px auto;
+        opacity: 0;
+    }
+    to {
+        margin: 50px auto;
+        opacity: 1;
+    }
+}
+
 @media (max-width: 1023px) {
 
     .modal {
@@ -51,5 +71,16 @@
 
     .icon__back { display: block; }
     .icon__close { display: none; }
+
+    @keyframes modal--slide {
+        from {
+            margin: 100px auto;
+            opacity: 0;
+        }
+        to {
+            margin: 0 auto;
+            opacity: 1;
+        }
+    }
 
 }
