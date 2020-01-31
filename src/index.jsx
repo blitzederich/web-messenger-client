@@ -5,12 +5,10 @@ import React, { useState, useEffect, useReducer } from 'react';
 import ReactDOM from 'react-dom';
 
 import Loading from './components/Loading/Loading.jsx';
-import DarkScreen from './components/DarkScreen/DarkScreen.jsx';
 import Auth from './components/Auth/Auth.jsx';
 import Main from './components/Main/Main.jsx';
 
 
-//import reducerUsers from './reducers/reducerUsers.js';
 import reducerDialogs from './reducers/reducerDialogs.js';
 import reducerMessages from './reducers/reducerMessages.js'
 
@@ -29,7 +27,6 @@ function App() {
 
     const [peerId, setPeerId] = useState(false);
 
-    //const [users, dispatchUsers] = useReducer(reducerUsers, []);
     const [dialogs, dispatchDialogs] = useReducer(reducerDialogs, []);
     const [messages, dispatchMessages] = useReducer(reducerMessages, []);
 
@@ -96,12 +93,3 @@ ReactDOM.render(
     <App />,
     document.getElementById('root')
 );
-
-/*
-window.onerror = (event, source, lineno, colno, error) => {
-    alert(event);
-    alert(source);
-    alert(error);
-    return false;
-}
-*/

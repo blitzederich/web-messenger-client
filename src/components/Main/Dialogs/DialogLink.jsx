@@ -19,9 +19,7 @@ export default function DialogLink(props) {
         setPeerId(message.peerId);
     }
 
-    /**
-     * Typing handler
-     */
+
     const [typing, setTyping] = useState(false);
     useEffect(() => {
         let updateId = Connect.addUpdateListener((event) => {

@@ -1,4 +1,4 @@
-import React, {useState, useContext, useRef} from 'react';
+import React, {useState, useContext, useRef, useEffect} from 'react';
 
 import './ChatForm.css';
 
@@ -50,15 +50,31 @@ function ChatForm() {
 
     }
 
+    useEffect(() => {
+        refInput.current.value = '';
+        setText('');
+
+        setTyping(false);
+        clearTimeout(timerId);
+        setTimerId(false);
+        
+    }, [peerId]);
+
     const [typing, setTyping] = useState(false);
+    const [timerId, setTimerId] = useState(false);
     const eventTyping = () => {
 
         if (typing) return;
 
         setTyping(true);
-        setTimeout(() => {
+        let timerId = setTimeout(() => {
             setTyping(false);
+            setTimerId(false);
         }, 5000);
+
+        setTimerId(timerId);
+
+
 
         API('/Messages/setTyping', { peerId });
         

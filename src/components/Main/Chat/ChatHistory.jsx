@@ -65,7 +65,6 @@ export default function ChatHistory() {
 
     });
 
-    /*** infinite scroll ***/
 
     const [isFetching, setIsFetching] = useState(false);
     const refIsFetching = useRef();

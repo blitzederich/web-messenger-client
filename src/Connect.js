@@ -13,9 +13,10 @@ Connect.connect = () => {
     xhr.send();
 
     xhr.addEventListener('load', () => {
-        let event = JSON.parse(xhr.responseText).event;
-        Connect.lastEventId = event.eventId;
-        Connect.update(event);
+        let events = JSON.parse(xhr.responseText).events;
+        Connect.lastEventId = events.slice(-1)[ 0 ].id;
+        Connect.update(events);
+
         Connect.connect();
     });
     xhr.addEventListener('abort', () => {
@@ -31,9 +32,11 @@ Connect.connect = () => {
     Connect.connection = xhr;
 }
 
-Connect.update = (event) => {
-    for (let id in Connect.listeners)
-        Connect.listeners[ id ](event);
+Connect.update = (events) => {
+    events.map(event => {
+        for (let id in Connect.listeners)
+            Connect.listeners[ id ](event);
+    });
 }
 
 Connect.addUpdateListener = (callback) => {

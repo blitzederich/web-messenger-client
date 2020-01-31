@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React from 'react';
 
 import ChatHead from './ChatHead.jsx';
 import ChatHistory from './ChatHistory.jsx';
@@ -6,11 +6,7 @@ import ChatForm from './ChatForm.jsx';
 
 import './Chat.css';
 
-import Context from '../../../context.js';
-
-function Chat(props) {
-
-    const { setPeerId } = useContext(Context);
+function Chat() {
 
     return (
         <div className="chat">

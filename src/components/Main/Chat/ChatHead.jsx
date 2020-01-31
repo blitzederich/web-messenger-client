@@ -14,12 +14,9 @@ export default function ChatHead() {
 
     const { peerId, setPeerId } = useContext(Context);
 
-    /**
-     * Typing handler
-     */
     const [typing, setTyping] = useState(false);
     useEffect(() => {
-        let updateId = Connect.addUpdateListener((event) => {
+        let updateId = Connect.addUpdateListener(event => {
 
             if (event.type !== 'message:typing') return;
             if (event.data.peerId !== peerId) return;
@@ -45,6 +42,7 @@ export default function ChatHead() {
     const [peerActivity, setPeerActivity] = useState(activityObj);
 
     useEffect(() => {
+        setTyping(false);
         (async () => {
             if (!peerId) return;
 

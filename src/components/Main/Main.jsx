@@ -26,38 +26,38 @@ function Main(props) {
 
         let listenerId = Connect.addUpdateListener(event => {
 
-            switch (event.type) {
-                case 'message': {
-                    let message = event.data;
-
-                    dispatchDialogs({type: 'push', message: message});
-
-                    if (refPeerId.current === message.peerId) {
-                        dispatchMessages({type: 'push', message: message});
-                        dispatchDialogs({type: 'read:you', peerId: refPeerId.current });
-                        
-                        API('/Messages/readHistory', { peerId: refPeerId.current});
-
-                        if (!refIsActiveTab.current) {
+                switch (event.type) {
+                    case 'message': {
+                        let message = event.data;
+    
+                        dispatchDialogs({type: 'push', message: message});
+    
+                        if (refPeerId.current === message.peerId) {
+                            dispatchMessages({type: 'push', message: message});
+                            dispatchDialogs({type: 'read:you', peerId: refPeerId.current });
+                            
+                            API('/Messages/readHistory', { peerId: refPeerId.current});
+    
+                            if (!refIsActiveTab.current) {
+                                refAudio.current.play();
+                            }
+    
+                        } else {
                             refAudio.current.play();
                         }
-
-                    } else {
-                        refAudio.current.play();
+    
+                        break;
                     }
-
-                    break;
+                    case 'message:read': {
+                        if (refPeerId.current === event.data.peerId)
+                            dispatchMessages({type: 'read'});
+                        
+                        dispatchDialogs({type: 'read', userId: event.data.peerId});
+                        break;
+                    }
+                    default:
+                        break;
                 }
-                case 'message:read': {
-                    if (refPeerId.current === event.data.peerId)
-                        dispatchMessages({type: 'read'});
-                    
-                    dispatchDialogs({type: 'read', userId: event.data.peerId});
-                    break;
-                }
-                default:
-                    break;
-            }
             
         });
         return () => {

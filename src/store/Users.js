@@ -24,7 +24,6 @@ class StoreUsers extends EventEmitter {
     }
 
     /**
-     * 
      * @param {Array<number>} usersId 
      */
     async getUsers(usersId) {
