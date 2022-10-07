@@ -13,7 +13,7 @@
     "@babel/polyfill": "^7.6.0",
     "@babel/preset-env": "^7.6.2",
     "@babel/preset-react": "^7.0.0",
-    "autoprefixer": "^7.2.3",
+    "autoprefixer": "^10.4.12",
     "babel-loader": "^8.0.6",
     "fetch-polyfill": "^0.8.2",
     "postcss-loader": "^3.0.0",
